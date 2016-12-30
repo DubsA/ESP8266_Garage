@@ -33,12 +33,16 @@ function hcsr04.init(pin_trig, pin_echo)
 		end
 		return (self.time_end - self.time_start) / 58
 	end
+	
+	function self.display()
+		print(self.measure())
+	end
 	return self
 end
 
 -- Check to see if the ultrasonic sensor measures less than 50cm. If there are two measurements in a row less than 50cm then send a notification.
 -- This prevents false positives, as insects may set off the sensor every now and then.
-function notify()
+function notify(device)
     if device.measure() < 50 then
         print("Door is Open")
         if n = 1 then
